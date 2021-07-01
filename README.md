@@ -9,7 +9,6 @@ This is a [PocketMine-MP](https://github.com/pmmp/PocketMine-MP) (or forks) plug
 - [x] **[PocketMine-MP](https://github.com/pmmp/PocketMine-MP)**
 
 _not tested doesn't mean not working_<br>
-_android devices are not supported_
 
 ---
 ### Donate
