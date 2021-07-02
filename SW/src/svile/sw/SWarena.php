@@ -104,6 +104,8 @@ final class SWarena
         $this->countdown = ($countdown + 0);
         $this->maxtime = ($maxtime + 0);
         $this->void = $void;
+
+        $plugin->getServer()->getPluginManager()->registerEvents(new ArenaListener($this, $plugin), $plugin);
         if (!$this->reload()) {
             $this->pg->getLogger()->info(TextFormat::RED . 'An error occured while reloading the arena: ' . TextFormat::WHITE . $this->SWname);
             $this->pg->getServer()->getPluginManager()->disablePlugin($this->pg);
