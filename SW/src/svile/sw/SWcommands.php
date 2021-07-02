@@ -335,6 +335,7 @@ class SWcommands extends PluginCommand {
                 }
 
                 $arena = $args[0];
+                $SWarena = $args[0];
 
                 if (!isset($this->getPlugin()->arenas[$arena])) {
                     $sender->sendMessage(TextFormat::RED . "Arena: " . TextFormat::YELLOW . $arena . TextFormat::RED . " doesn't exist.");
