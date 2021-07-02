@@ -195,9 +195,7 @@ class SWlistener implements Listener {
         $to = $event->getTo();
 
         $player = $event->getPlayer();
-        if($player instanceof Player)
         if (floor($from->x) !== floor($to->x) || floor($from->z) !== floor($to->z) || floor($from->y) !== floor($from->y)) {
-            if($player instanceof Player)
             $arena = $this->plugin->getPlayerArena($player);
             if ($arena !== null) {
                 if ($arena->GAME_STATE === SWarena::STATE_COUNTDOWN) {
