@@ -166,7 +166,7 @@ class SWmain extends PluginBase
 
     public function getPlayerArena(Player $player) : ?SWarena
     {
-        return $this->player_arenas[$pid = $player->getId()] ? $this->arenas[$this->player_arenas[$pid]] : null;
+        return isset($this->player_arenas[$pid = $player->getId()]) ? $this->arenas[$this->player_arenas[$pid]] : null;
     }
 
     public function setPlayerArena(Player $player, ?string $arena) : void
