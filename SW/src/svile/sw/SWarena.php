@@ -305,24 +305,27 @@ final class SWarena
 
 
     /** VOID */
-    private function refillChests()
+    private function refillChests() : void
     {
-        $contents = $this->pg->getChestContents();
-        foreach ($this->pg->getServer()->getLevelByName($this->world)->getTiles() as $tile) {
+        $contents = $this->plugin->getChestContents();
+
+        foreach ($this->plugin->getServer()->getLevelByName($this->world)->getTiles() as $tile) {
             if ($tile instanceof Chest) {
-                //CLEARS CHESTS
-                for ($i = 0; $i < $tile->getSize(); $i++) {
-                    $tile->getInventory()->setItem($i, Item::get(0));
+
+                $inventory = $tile->getInventory();
+                $inventory->clearAll(false);
+
+                if (empty($contents)) {
+                    $contents = $this->plugin->getChestContents();
                 }
-                //SET CONTENTS
-                if (empty($contents))
-                    $contents = $this->pg->getChestContents();
+
                 foreach (array_shift($contents) as $key => $val) {
-                    $tile->getInventory()->setItem($key, Item::get($val[0], 0, $val[1]));
+                    $inventory->setItem($key, Item::get($val[0], 0, $val[1]), false);
                 }
+
+                $inventory->sendContents($inventory->getViewers());
             }
         }
-        unset($contents, $tile);
     }
 
 
@@ -477,7 +480,7 @@ final class SWarena
     public function closePlayer(Player $p, $left = false, $spectate = false)
     {
         if ($this->quit($p->getName(), $left, $spectate)) {
-            $p->gamemode = 4;//Just to make sure setGamemode() won't return false if the gm is the same
+            //$p->gamemode = 4;//Just to make sure setGamemode() won't return false if the gm is the same
             $p->setGamemode($p->getServer()->getDefaultGamemode());
             $p->getInventory()->clearAll();
             $p->removeAllEffects();
