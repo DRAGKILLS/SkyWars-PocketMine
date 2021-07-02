@@ -367,6 +367,9 @@ final class SWarena
         if ($this->GAME_STATE == 2) {
             if ($this->time <= $this->pg->configs['no.pvp.countdown'])
                 foreach ($this->pg->getServer()->getLevelByName($this->world)->getPlayers() as $p)
+                    if(count($p) <= 1){
+                       $this->stop();
+                    }
                     $p->sendPopup(str_replace('{COUNT}', $this->pg->configs['no.pvp.countdown'] - $this->time + 1, $this->pg->lang['no.pvp.countdown']));
             else
                 $this->GAME_STATE = 1;
