@@ -23,22 +23,6 @@ _Benefits: You will be credited in the source code as a generous **donor**_ :smi
 - ![Paypal](https://raw.githubusercontent.com/svilex/res/master/paypal.png) Paypal: [**Donate**](https://www.paypal.me/svile) :money_with_wings:
 
 ---
-### Releases - Downloads
-
-* **pre-Release [_0.6_](https://github.com/svilex/SkyWars-PocketMine/releases/tag/v0.6) (May 7, 2016)**
-
->- Beautiful config file with descriptions.<br>
->- Spectator mode when a player dies.<br>
->- Economy support for money rewards.<br>
->- Reward command.<br>
->- /sw join & /sw quit.<br>
->- New sign knockBack type.<br>
->- More death messages.<br>
->- An option to set the player max health.<br>
->- An option to choose if a player can drop items.<br>
->- Added COBBLESTONE & DIRT to chests.<br>
->- Bug Fixes that you don't need to know because are a lot :smirk:
-
 ### How to use
 
 ##### Installation
