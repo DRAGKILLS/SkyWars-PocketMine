@@ -127,6 +127,7 @@ class SWlistener implements Listener {
             $arena = $this->plugin->getArenaFromSign($block);
             if ($arena !== null) {
                 $player = $event->getPlayer();
+                if($player instanceof Player)
                 if ($this->plugin->getPlayerArena($player) === null) {
                     $this->plugin->arenas[$arena]->join($player);
                 }
@@ -137,7 +138,8 @@ class SWlistener implements Listener {
     public function onLevelChange(EntityLevelChangeEvent $event) : void
     {//no fucking clue why this check exists
         $player = $event->getEntity();
-        if ($player instanceof Player && $this->plugin->getPlayerArena($player) !== null) {
+        if($player instanceof Player)
+        if ($this->plugin->getPlayerArena($player) !== null) {
             $event->setCancelled();
         }
     }
@@ -145,7 +147,8 @@ class SWlistener implements Listener {
     public function onTeleport(EntityTeleportEvent $event) : void
     {//no fucking clue why this check exists
         $player = $event->getEntity();
-        if ($player instanceof Player && $this->plugin->getPlayerArena($player) !== null && $event->getFrom()->distanceSquared($event->getTo()) >= 20) {
+        if($player instanceof Player)
+        if ($this->plugin->getPlayerArena($player) !== null && $event->getFrom()->distanceSquared($event->getTo()) >= 20) {
             $event->setCancelled();
         }
     }
@@ -153,6 +156,7 @@ class SWlistener implements Listener {
     public function onDropItem(PlayerDropItemEvent $event) : void
     {
         $player = $event->getPlayer();
+        if($player instanceof Player)
         $arena = $this->plugin->getPlayerArena($player);
 
         if ($arena !== null) {
@@ -166,7 +170,8 @@ class SWlistener implements Listener {
     public function onPickUp(InventoryPickupItemEvent $event) : void
     {
         $player = $event->getInventory()->getHolder();
-        if ($player instanceof Player && ($arena = $this->plugin->getPlayerArena($player)) !== null && $arena->inArena($player) === SWarena::PLAYER_SPECTATING) {
+        if($player instanceof Player)
+        if (($arena = $this->plugin->getPlayerArena($player)) !== null && $arena->inArena($player) === SWarena::PLAYER_SPECTATING) {
             $event->setCancelled();
         }
     }
@@ -174,13 +179,13 @@ class SWlistener implements Listener {
     public function onItemHeld(PlayerItemHeldEvent $event) : void
     {
         $player = $event->getPlayer();
-        if ($player instanceof Player && ($arena = $this->plugin->getPlayerArena($player)) !== null && $arena->inArena($player) === SWarena::PLAYER_SPECTATING) {
+        if($player instanceof Player)
+        if (($arena = $this->plugin->getPlayerArena($player)) !== null && $arena->inArena($player) === SWarena::PLAYER_SPECTATING) {
             $item = $event->getItem();
             if (($item->getId() . ':' . $item->getDamage()) === $this->plugin->configs["spectator.quit.item"]) {
                 $arena->closePlayer($player);
+                $player->getInventory()->setHeldItemIndex(0);
             }
-            $event->setCancelled();
-            $player->getInventory()->setHeldItemIndex(1);
         }
     }
 
@@ -190,7 +195,7 @@ class SWlistener implements Listener {
         $to = $event->getTo();
 
         $player = $event->getPlayer();
-
+        if($player instanceof Player)
         if (floor($from->x) !== floor($to->x) || floor($from->z) !== floor($to->z) || floor($from->y) !== floor($from->y)) {//moved a block
             $arena = $this->plugin->getPlayerArena($player);
             if ($arena !== null) {
@@ -214,7 +219,6 @@ class SWlistener implements Listener {
     public function onQuit(PlayerQuitEvent $event) : void
     {
         $player = $event->getPlayer();
-
         if($player instanceof Player)
         $arena = $this->plugin->getPlayerArena($player);
 
@@ -226,6 +230,7 @@ class SWlistener implements Listener {
     public function onDeath(PlayerDeathEvent $event) : void
     {
         $player = $event->getPlayer();
+        if($player instanceof Player)
         $arena = $this->plugin->getPlayerArena($player);
 
         if ($arena !== null) {
@@ -301,6 +306,7 @@ class SWlistener implements Listener {
     public function onBreak(BlockBreakEvent $event) : void
     {
         $player = $event->getPlayer();
+        if($player instanceof Player)
         $arena = $this->plugin->getPlayerArena($player);
 
         if ($arena !== null && $arena->inArena($player) !== SWarena::PLAYER_PLAYING) {
@@ -323,6 +329,7 @@ class SWlistener implements Listener {
     public function onPlace(BlockPlaceEvent $event) : void
     {
         $player = $event->getPlayer();
+        if($player instanceof Player)
         $arena = $this->plugin->getPlayerArena($player);
 
         if ($arena !== null && $arena->inArena($player) !== SWarena::PLAYER_PLAYING) {
