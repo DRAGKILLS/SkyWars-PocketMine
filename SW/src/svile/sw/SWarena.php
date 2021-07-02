@@ -157,12 +157,12 @@ final class SWarena
             'spawns' => []
         ]);
         $this->SWname = $config->get('name');
-        $this->slot = ($config->get('slot') + 0);
+        $this->slot = (int) $config->get('slot');
         $this->world = $config->get('world');
-        $this->countdown = ($config->get('countdown') + 0);
-        $this->maxtime = ($config->get('maxGameTime') + 0);
+        $this->countdown = (int) $config->get('countdown');
+        $this->maxtime = (int) $config->get('maxGameTime');
         $this->spawns = $config->get('spawns');
-        $this->void = ($config->get('void_Y') + 0);
+        $this->void = (int) $config->get('void_Y');
         unset($config);
         $this->players = [];
         $this->spectators = [];
