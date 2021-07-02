@@ -16,6 +16,5 @@ paste here or delete these lines
 <!--- write the plugin version ex. v0.1 -->
 - **SW_VERSION**: 
 
-
 <!--- write the name and the version of the PocketMine fork you are using -->
 - **POCKETMINE**: 
