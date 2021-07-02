@@ -214,6 +214,7 @@ class SWlistener implements Listener {
     public function onQuit(PlayerQuitEvent $event) : void
     {
         $player = $event->getPlayer();
+
         if($player instanceof Player)
         $arena = $this->plugin->getPlayerArena($player);
 
