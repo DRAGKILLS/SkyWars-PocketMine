@@ -428,7 +428,7 @@ final class SWarena
         foreach ($level->getPlayers() as $p) {
             $p->sendMessage(str_replace('{COUNT}', '[' . $this->getSlot(true) . '/' . $this->slot . ']', str_replace('{PLAYER}', $player->getName(), $this->pg->lang['game.join'])));
         }
-        $this->pg->refreshSigns(false, $this->SWname, $this->getSlot(true), $this->slot, $this->getState());
+        $this->pg->refreshSigns($this->SWname, $this->getSlot(true), $this->slot, $this->getState());
         return true;
     }
 
