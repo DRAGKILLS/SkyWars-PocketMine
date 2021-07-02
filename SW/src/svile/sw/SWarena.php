@@ -237,7 +237,7 @@ final class SWarena
     }
 
 
-    public function getName(){
+    final public function getName(){
          return $this->SWname;
     }
 
@@ -307,16 +307,16 @@ final class SWarena
     /** VOID */
     private function refillChests() : void
     {
-        $contents = $this->plugin->getChestContents();
+        $contents = $this->pg->getChestContents();
 
-        foreach ($this->plugin->getServer()->getLevelByName($this->world)->getTiles() as $tile) {
+        foreach ($this->pg->getServer()->getLevelByName($this->world)->getTiles() as $tile) {
             if ($tile instanceof Chest) {
 
                 $inventory = $tile->getInventory();
                 $inventory->clearAll(false);
 
                 if (empty($contents)) {
-                    $contents = $this->plugin->getChestContents();
+                    $contents = $this->pg->getChestContents();
                 }
 
                 foreach (array_shift($contents) as $key => $val) {
@@ -330,7 +330,7 @@ final class SWarena
 
 
     /** VOID */
-    public function tick()
+    public function tick(): void
     {
         if ($this->GAME_STATE == 0 && count($this->players) < ($this->pg->configs['needed.players.to.run.countdown'] + 0))
             return;
