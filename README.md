@@ -8,7 +8,7 @@ This is a [PocketMine-MP](https://github.com/pmmp/PocketMine-MP) (or forks) plug
 
 - [x] **[PocketMine-MP](https://github.com/pmmp/PocketMine-MP)**
 
-_not tested doesn't mean not working_<br>
+_This Plugin Is Tested But no game end if you kill player_<br>
 
 ---
 ### Donate
@@ -39,30 +39,6 @@ _Benefits: You will be credited in the source code as a generous **donor**_ :smi
 >- Added COBBLESTONE & DIRT to chests.<br>
 >- Bug Fixes that you don't need to know because are a lot :smirk:
 
-* **pre-Release [_0.4_](https://github.com/svilex/SkyWars-PocketMine/releases/tag/v0.4) (April 24, 2016)**
-
->- Added air generator option.<br>
->- Added a config for signs format.<br>
->- Better and faster world reset.<br>
->- Bug Fixes.
-
-* **pre-Release [_0.3_](https://github.com/svilex/SkyWars-PocketMine/releases/tag/v0.3) (April 14, 2016)**
-
->- Maybe fixed #3<br>
->- Added a sound on arena join.
-
-<!--
-* **pre-Release [_0.2_](https://github.com/svilex/SkyWars-PocketMine/releases/tag/v0.2) (April 13, 2016)**
-
->- Now removing players effects on respawn, arena join, quit.<br>
->- Added a config option to set the needed players for the countdown start.<br>
->- Now players are no more able to interact before the game start.<br>
->- Added a sound for the last 10 seconds of the countdown.<br>
--->
-
-_Click [**here**](https://github.com/svilex/SkyWars-PocketMine/releases) for other releases_.
-
----
 ### How to use
 
 ##### Installation
@@ -99,13 +75,4 @@ Command | Description
 - [Français]() no video yet
 - [Italiano]() no video yet
 
-###### Have you made a video? Contact me to put it here:exclamation:
-
----
-### Contacts
-
-- **Kik:** \_svile\_<br/>
-- **Telegram_Gruop:** :link: https://telegram.me/svile<br/>
-- **E-mail:** thesville@gmail.com<br/>
-
-###### if you make video and want me to add it here make issue
+###### Have you made a video? Create issue and set name to [YOUTUBE] and in description put your video link
