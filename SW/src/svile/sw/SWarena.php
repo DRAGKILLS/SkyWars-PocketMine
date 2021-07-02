@@ -567,7 +567,7 @@ final class SWarena
                     }
                     //Reward command
                     $command = trim($this->pg->configs['reward.command']);
-                    if (strlen($command) > 1 && $command{0} == '/') {
+                    if (strlen($command) > 1 && $command[0] == "/") {
                         $this->pg->getServer()->dispatchCommand(new \pocketmine\command\ConsoleCommandSender(), str_replace('{PLAYER}', $p->getName(), substr($command, 1)));
                     }
                 }
