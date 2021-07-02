@@ -90,17 +90,17 @@ class SWmain extends PluginBase
 
         //This changes worlds NBT name with folders ones to avoid problems //world folder name should be used instead of doing this
         try {
-            foreach (scandir($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73") as $worldDir) {
-                if (is_dir($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir) && is_file($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir . "\x2f\x6c\x65\x76\x65\x6c\x2e\x64\x61\x74")) {
+            foreach (scandir($this->getServer()->getDataPath() . "worlds") as $worldDir) {
+                if (is_dir($this->getServer()->getDataPath() . "worlds/" . $worldDir) && is_file($this->getServer()->getDataPath() . "worlds/" . $worldDir . "/level.dat")) {
                     $nbt = new NBT(NBT::BIG_ENDIAN);
-                    $nbt->readCompressed(file_get_contents($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir . "\x2f\x6c\x65\x76\x65\x6c\x2e\x64\x61\x74"));
+                    $nbt->readCompressed(file_get_contents($this->getServer()->getDataPath() . "worlds/" . $worldDir . "/level.dat"));
                     $levelData = $nbt->getData();
-                    if (array_key_exists("\x44\x61\x74\x61", $levelData) && $levelData["\x44\x61\x74\x61"] instanceof Compound) {
-                        $levelData = $levelData["\x44\x61\x74\x61"];
-                        if (array_key_exists("\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65", $levelData) && $levelData["\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65"] != $worldDir) {
-                            $levelData["\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65"] = new Str("\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65", $worldDir);
-                            $nbt->setData(new Compound('', ["\x44\x61\x74\x61" => $levelData]));
-                            file_put_contents($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir . "\x2f\x6c\x65\x76\x65\x6c\x2e\x64\x61\x74", $nbt->writeCompressed());
+                    if (array_key_exists("Data", $levelData) && $levelData["Data"] instanceof Compound) {
+                        $levelData = $levelData["Data"];
+                        if (array_key_exists("LevelName", $levelData) && $levelData["LevelName"] != $worldDir) {
+                            $levelData["LevelName"] = new Str("LevelName", $worldDir);
+                            $nbt->setData(new Compound('', ["Data" => $levelData]));
+                            file_put_contents($this->getServer()->getDataPath() . "worlds/" . $worldDir . "/level.dat", $nbt->writeCompressed());
                         }
                         unset($worldDir, $levelData, $nbt);
                     } else {
@@ -161,9 +161,9 @@ class SWmain extends PluginBase
         */
         $this->configs = new Config($this->getDataFolder() . 'SW_configs.yml', CONFIG::YAML, [
             'CONFIG_VERSION' => self::SW_VERSION,
-            'banned.commands.while.in.game' => array('/hub', '/lobby', '/spawn', '/tpa', '/tp', '/tpaccept', '/back', '/home', '/f', '/kill'),
+            'banned.commands.while.in.game' => ['/hub', '/lobby', '/spawn', '/tpa', '/tp', '/tpaccept', '/back', '/home', '/f', '/kill'],
             'start.when.full' => true,
-            'needed.players.to.run.countdown' => 1,
+            'needed.players.to.run.countdown' => 2,
             'join.max.health' => 20,
             'join.health' => 20,
             'damage.cancelled.causes' => [0, 3, 4, 8, 12, 15],
@@ -233,7 +233,7 @@ class SWmain extends PluginBase
         unset($newlang);
 
         //Register timer and listener
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new SWtimer($this), 19);
+        $this->getScheduler()->scheduleRepeatingTask(new SWtimer($this), 19);
         $this->getServer()->getPluginManager()->registerEvents(new SWlistener($this), $this);
 
         //Calls loadArenas() & loadSigns() to loads arenas & signs...
@@ -427,7 +427,7 @@ class SWmain extends PluginBase
     /**
      * @return array
      */
-    public function getChestContents() //TODO: **rewrite** this and let the owner decide the contents of the chest
+    public function getChestContents() //TODO: Make spawn protection to 0 for chests work
     {
         $items = array(
             //ARMOR
