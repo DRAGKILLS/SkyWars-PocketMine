@@ -50,7 +50,6 @@ class SWtimer extends Task
 
     public function __construct(SWmain $plugin)
     {
-        parent::__construct($plugin);
         $this->tick = (bool) $plugin->configs["sign.tick"];
     }
 
