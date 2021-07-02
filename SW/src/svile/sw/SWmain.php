@@ -60,7 +60,7 @@ use pocketmine\utils\TextFormat;
 use pocketmine\item\Item;
 use pocketmine\tile\Sign;
 use pocketmine\math\Vector3;
-
+use pocketmine\Player;
 
 class SWmain extends PluginBase
 {
