@@ -47,15 +47,18 @@ class SWtimer extends Task
 
     /** @var bool */
     private $tick;
+    
+    private $plugin;
 
     public function __construct(SWmain $plugin)
     {
+        $this->plugin = $plugin;
         $this->tick = (bool) $plugin->configs["sign.tick"];
     }
 
     public function onRun(int $tick) : void
     {
-        $owner = $this->getOwner();
+        $owner = $this->plugin;
 
         foreach ($owner->arenas as $arena) {
             $arena->tick();
